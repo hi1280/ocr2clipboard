@@ -1,11 +1,24 @@
-// Listen to messages sent from other parts of the extension.
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  // onMessage must return "true" if response is async.
-  const isResponseAsync = false;
+import { Rectangle } from '.';
 
-  if (request.popupMounted) {
-    console.log('eventPage notified that Popup.tsx has mounted.');
-  }
+chrome.browserAction.onClicked.addListener(() => {
+  chrome.tabs.executeScript({ file: '/scripts/content-script.js' });
+});
 
-  return isResponseAsync;
+chrome.runtime.onMessage.addListener(async (rect: Rectangle, _, sendResponse) => {
+  const base64Img = await chrome.tabs.captureVisibleTab().catch(e => {
+    console.log(e);
+  });
+  const tabs = (await chrome.tabs.query({ active: true, currentWindow: true }).catch(e => {
+    console.log(e);
+  })) as chrome.tabs.Tab[];
+  await chrome.tabs
+    .sendMessage(tabs[0].id!, {
+      base64Img,
+      rect,
+    })
+    .catch(e => {
+      console.log(e);
+    });
+  sendResponse(true);
+  return true;
 });

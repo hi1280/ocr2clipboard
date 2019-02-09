@@ -1,12 +1,12 @@
 {
-  "name": "chrome-extension-react-typescript-boilerplate",
-  "version": "1.0.0",
-  "description": "A boilerplate project to quickly build a Chrome extension using TypeScript and React (built using webpack).",
+  "name": "ocr2clipboard",
+  "version": "0.0.1",
+  "description": "",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack --config webpack.dev.js",
     "watch": "webpack -w --config webpack.dev.js",
-    "lint": "tslint 'src/**/*.{ts, tsx}' -p tsconfig.json --fix"
+    "lint": "tslint -p tsconfig.json --fix"
   },
   "author": "Joe Martella",
   "license": "MIT",
@@ -16,17 +16,21 @@
     }
   },
   "lint-staged": {
-    "*.ts": [
+    "*.{ts,tsx}": [
       "prettier --write",
       "npm run lint",
+      "git add"
+    ],
+    "*.{css,scss}":[
+      "prettier --write",
       "git add"
     ]
   },
   "devDependencies": {
-    "@types/chrome": "0.0.60",
     "@types/react": "^16.0.40",
     "@types/react-dom": "^16.0.4",
     "css-loader": "^0.28.11",
+    "dotenv": "^6.2.0",
     "husky": "^1.2.0",
     "lint-staged": "^8.1.0",
     "node-sass": "^4.7.2",
@@ -35,13 +39,13 @@
     "style-loader": "^0.20.3",
     "ts-loader": "^4.0.1",
     "tslint": "^5.12.1",
-    "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.17.0",
     "tslint-react": "^3.6.0",
     "typescript": "^2.7.2",
     "webpack": "^4.1.1",
     "webpack-cli": "^3.1.1",
-    "webpack-merge": "^4.1.4"
+    "webpack-merge": "^4.1.4",
+    "chrome-extension-async": "^3.3.2"
   },
   "dependencies": {
     "react": "^16.2.0",

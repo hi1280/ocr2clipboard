@@ -1,26 +1,29 @@
 {
-    "manifest_version": 2,
-
-    "name": "Chrome Extension (built with TypeScript + React)",
-    "description":
-        "A boilerplate project to quickly build a Chrome extension using TypeScript and React (built using webpack).",
-    "version": "1.0.0",
-
-    "browser_action": {
-        "default_icon": "icon16.png",
-        "default_popup": "popup.html"
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "description": "__MSG_appDescription__",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "default_locale": "ja",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "js/eventPage.js",
+      "js/chrome-extension-async.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
     },
-
-    "background": {
-        "scripts": ["js/eventPage.js"],
-        "persistent": false
-    },
-
-    "icons": {
-        "16": "icon16.png",
-        "48": "icon48.png",
-        "128": "icon128.png"
-    },
-
-    "permissions": []
+    "default_title": "__MSG_browserActionTitle__"
+  },
+  "permissions": [
+    "activeTab"
+  ]
 }
