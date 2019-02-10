@@ -1,6 +1,10 @@
-chrome.browserAction.onClicked.addListener(() => {
-  chrome.tabs.executeScript({ file: '/js/content-script.js' });
-});
+// chrome.browserAction.onClicked.addListener(async() => {
+//   const item = await chrome.storage.sync.get('apiKey');
+//   if(item && item.apiKey){
+//     chrome.tabs.executeScript({ file: 'js/chrome-extension-async.js' });
+//     chrome.tabs.executeScript({ file: 'js/content-script.js' });
+//   }
+// });
 
 chrome.runtime.onMessage.addListener(async (_1, _2, sendResponse) => {
   const base64Img = await chrome.tabs.captureVisibleTab().catch(e => {

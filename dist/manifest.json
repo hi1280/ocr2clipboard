@@ -12,8 +12,8 @@
   "background": {
     "persistent": false,
     "scripts": [
-      "js/event-page.js",
-      "js/chrome-extension-async.js"
+      "js/chrome-extension-async.js",
+      "js/event-page.js"
     ]
   },
   "browser_action": {
@@ -21,9 +21,12 @@
       "19": "images/icon-19.png",
       "38": "images/icon-38.png"
     },
-    "default_title": "__MSG_browserActionTitle__"
+    "default_title": "__MSG_browserActionTitle__",
+    "default_popup": "popup.html"
   },
   "permissions": [
-    "activeTab"
-  ]
+    "activeTab",
+    "storage"
+  ],
+  "options_page": "options.html"
 }

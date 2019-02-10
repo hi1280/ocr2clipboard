@@ -29,6 +29,7 @@ const TextArea = styled.textarea`
 
 class Main extends React.Component {
   public state = {
+    apiKey: '',
     drag: false,
     mouse: {
       x: 0,
@@ -55,11 +56,14 @@ class Main extends React.Component {
     super(props);
     this.imageCanvasRef = React.createRef();
     this.textareaRef = React.createRef();
+    chrome.storage.sync.get('apiKey').then(v => {
+      this.setState({ apiKey: v.apiKey });
+    });
   }
 
   public render() {
     return (
-      <div>
+      <React.Fragment>
         <Measure
           offset={true}
           onResize={contentRect => {
@@ -86,7 +90,7 @@ class Main extends React.Component {
           )}
         </Measure>
         <canvas ref={this.imageCanvasRef} width={this.state.rectangle.width} height={this.state.rectangle.height} />
-      </div>
+      </React.Fragment>
     );
   }
 
@@ -129,7 +133,7 @@ class Main extends React.Component {
           this.state.rectangle.width,
           this.state.rectangle.height,
         );
-        const res = await fetch(`https://vision.googleapis.com/v1/images:annotate?key=${ENV.API_KEY}`, {
+        const res = await fetch(`https://vision.googleapis.com/v1/images:annotate?key=${this.state.apiKey}`, {
           body: JSON.stringify({
             requests: [
               {
