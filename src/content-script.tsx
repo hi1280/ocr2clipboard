@@ -37,7 +37,7 @@ class Main extends React.Component {
     rectangle: {
       height: 0,
       left: 0,
-      rgb: { red: '200', green: '0', blue: '0' },
+      rgb: { red: '255', green: '0', blue: '0' },
       top: 0,
       width: 0,
     },
@@ -55,56 +55,6 @@ class Main extends React.Component {
     super(props);
     this.imageCanvasRef = React.createRef();
     this.textareaRef = React.createRef();
-    const listener = (request: { base64Img: string }, _: any, sendResponse: (response: any) => void) => {
-      const base64Img = request.base64Img;
-      const canvas = this.imageCanvasRef.current as HTMLCanvasElement;
-      const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
-      const img = new Image();
-      img.src = base64Img;
-      img.addEventListener('load', async () => {
-        ctx.drawImage(
-          img,
-          this.state.rectangle.left,
-          this.state.rectangle.top,
-          this.state.rectangle.width,
-          this.state.rectangle.height,
-          0,
-          0,
-          this.state.rectangle.width,
-          this.state.rectangle.height,
-        );
-        const res = await fetch(`https://vision.googleapis.com/v1/images:annotate?key=${ENV.API_KEY}`, {
-          body: JSON.stringify({
-            requests: [
-              {
-                features: [
-                  {
-                    type: 'TEXT_DETECTION',
-                  },
-                ],
-                image: {
-                  content: canvas.toDataURL('image/png').split(',')[1],
-                },
-              },
-            ],
-          }),
-          method: 'POST',
-        });
-        const json = await res.json();
-        if (json && json.responses && json.responses[0].textAnnotations) {
-          const textarea = this.textareaRef.current as HTMLTextAreaElement;
-          textarea.value = json.responses[0].textAnnotations[0].description;
-          textarea.style.left = `${this.state.mouse.x}px`;
-          textarea.style.top = `${this.state.mouse.y}px`;
-          textarea.select();
-          textarea.style.display = 'block';
-        }
-      });
-      chrome.runtime.onMessage.removeListener(listener);
-      sendResponse(true);
-      return true;
-    };
-    chrome.runtime.onMessage.addListener(listener);
   }
 
   public render() {
@@ -157,6 +107,60 @@ class Main extends React.Component {
     });
     ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
     chrome.runtime.sendMessage({});
+    this.addMessageListener();
+  }
+
+  private addMessageListener() {
+    const listener = (request: { base64Img: string }, _: any, sendResponse: (response: any) => void) => {
+      const base64Img = request.base64Img;
+      const canvas = this.imageCanvasRef.current as HTMLCanvasElement;
+      const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+      const img = new Image();
+      img.src = base64Img;
+      img.addEventListener('load', async () => {
+        ctx.drawImage(
+          img,
+          this.state.rectangle.left,
+          this.state.rectangle.top,
+          this.state.rectangle.width,
+          this.state.rectangle.height,
+          0,
+          0,
+          this.state.rectangle.width,
+          this.state.rectangle.height,
+        );
+        const res = await fetch(`https://vision.googleapis.com/v1/images:annotate?key=${ENV.API_KEY}`, {
+          body: JSON.stringify({
+            requests: [
+              {
+                features: [
+                  {
+                    type: 'TEXT_DETECTION',
+                  },
+                ],
+                image: {
+                  content: canvas.toDataURL('image/png').split(',')[1],
+                },
+              },
+            ],
+          }),
+          method: 'POST',
+        });
+        const json = await res.json();
+        if (json && json.responses && json.responses[0].textAnnotations) {
+          const textarea = this.textareaRef.current as HTMLTextAreaElement;
+          textarea.value = json.responses[0].textAnnotations[0].description;
+          textarea.style.left = `${this.state.mouse.x}px`;
+          textarea.style.top = `${this.state.mouse.y}px`;
+          textarea.style.display = 'block';
+          textarea.select();
+        }
+      });
+      chrome.runtime.onMessage.removeListener(listener);
+      sendResponse(true);
+      return true;
+    };
+    chrome.runtime.onMessage.addListener(listener);
   }
 
   private onMouseMove(canvasEl: HTMLCanvasElement, x: number, y: number) {

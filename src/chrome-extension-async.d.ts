@@ -1756,6 +1756,8 @@ declare namespace chrome.devtools.network {
  * Availability: Since Chrome 18.
  */
 declare namespace chrome.devtools.panels {
+  interface PanelShownEvent extends chrome.events.Event<(window: chrome.windows.Window) => void> {}
+
   interface PanelHiddenEvent extends chrome.events.Event<() => void> {}
 
   interface PanelSearchEvent extends chrome.events.Event<(action: string, queryString?: string) => void> {}
@@ -7147,6 +7149,11 @@ declare namespace chrome.types {
     incognito?: boolean;
   }
 
+  /**
+   * @param details Details of the currently effective value.
+   */
+  type DetailsCallback = (details: ChromeSettingGetResultDetails) => void;
+
   interface ChromeSettingGetResultDetails {
     /**
      * One of
@@ -7322,6 +7329,18 @@ declare namespace chrome.wallpaper {
  * @since Chrome 16.
  */
 declare namespace chrome.webNavigation {
+  interface GetFrameDetails {
+    /**
+     * The ID of the process runs the renderer for this tab.
+     * @since Chrome 22.
+     */
+    processId: number;
+    /** The ID of the tab in which the frame is. */
+    tabId: number;
+    /** The ID of the frame in the given tab. */
+    frameId: number;
+  }
+
   interface GetFrameResultDetails {
     /** The URL currently associated with this frame, if the frame identified by the frameId existed at one point in the given tab. The fact that an URL is associated with a given frameId does not imply that the corresponding frame still exists. */
     url: string;
