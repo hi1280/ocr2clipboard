@@ -3,12 +3,12 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "build": "webpack --config webpack.prod.js",
-    "dev": "webpack --config webpack.dev.js",
-    "watch": "webpack -w --config webpack.dev.js",
+    "build": "NODE_ENV=production webpack --config webpack.prod.js",
+    "dev": "NODE_ENV=development webpack --config webpack.dev.js",
+    "watch": "NODE_ENV=development webpack -w --config webpack.dev.js",
     "lint": "tslint -p tsconfig.json --fix"
   },
-  "author": "Joe Martella",
+  "author": "hi1280",
   "license": "MIT",
   "husky": {
     "hooks": {
@@ -21,7 +21,7 @@
       "npm run lint",
       "git add"
     ],
-    "*.{css,scss}":[
+    "*.{css,scss}": [
       "prettier --write",
       "git add"
     ]
@@ -29,6 +29,9 @@
   "devDependencies": {
     "@types/react": "^16.0.40",
     "@types/react-dom": "^16.0.4",
+    "@types/react-measure": "^2.0.4",
+    "@types/styled-components": "^4.1.8",
+    "chrome-extension-async": "^3.3.2",
     "css-loader": "^0.28.11",
     "dotenv": "^6.2.0",
     "husky": "^1.2.0",
@@ -44,11 +47,12 @@
     "typescript": "^2.7.2",
     "webpack": "^4.1.1",
     "webpack-cli": "^3.1.1",
-    "webpack-merge": "^4.1.4",
-    "chrome-extension-async": "^3.3.2"
+    "webpack-merge": "^4.1.4"
   },
   "dependencies": {
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-measure": "^2.2.4",
+    "styled-components": "^4.1.3"
   }
 }

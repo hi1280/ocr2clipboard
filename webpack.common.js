@@ -1,10 +1,12 @@
-const path = require("path");
+const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   entry: {
     popup: path.join(__dirname, "src/popup/index.tsx"),
-    eventPage: path.join(__dirname, "src/eventPage.ts"),
-    "chrome-extension-async": path.join(__dirname, "src/chrome-extension-async.js")
+    "event-page": path.join(__dirname, "src/event-page.ts"),
+    "chrome-extension-async": path.join(__dirname, "src/chrome-extension-async.js"),
+    "content-script": path.join(__dirname, "src/content-script.tsx")
   },
   output: {
     path: path.join(__dirname, "dist/js"),
@@ -36,5 +38,10 @@ module.exports = {
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js"]
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'ENV.API_KEY': JSON.stringify(require(path.join(__dirname, 'environments', `${process.env.NODE_ENV}.js`)).API_KEY),
+    })
+  ]
 };

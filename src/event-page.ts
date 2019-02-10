@@ -1,10 +1,8 @@
-import { Rectangle } from '.';
-
 chrome.browserAction.onClicked.addListener(() => {
-  chrome.tabs.executeScript({ file: '/scripts/content-script.js' });
+  chrome.tabs.executeScript({ file: '/js/content-script.js' });
 });
 
-chrome.runtime.onMessage.addListener(async (rect: Rectangle, _, sendResponse) => {
+chrome.runtime.onMessage.addListener(async (_1, _2, sendResponse) => {
   const base64Img = await chrome.tabs.captureVisibleTab().catch(e => {
     console.log(e);
   });
@@ -14,7 +12,6 @@ chrome.runtime.onMessage.addListener(async (rect: Rectangle, _, sendResponse) =>
   await chrome.tabs
     .sendMessage(tabs[0].id!, {
       base64Img,
-      rect,
     })
     .catch(e => {
       console.log(e);

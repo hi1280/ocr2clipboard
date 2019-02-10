@@ -11,9 +11,7 @@
       "es2015",
       "dom"
     ],
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true
+    "strict": true,
   },
   "include": [
     "src/**/*",

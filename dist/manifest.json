@@ -12,7 +12,7 @@
   "background": {
     "persistent": false,
     "scripts": [
-      "js/eventPage.js",
+      "js/event-page.js",
       "js/chrome-extension-async.js"
     ]
   },

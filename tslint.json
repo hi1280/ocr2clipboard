@@ -7,7 +7,8 @@
   ],
   "jsRules": {},
   "rules": {
-    "no-console": false
+    "no-console": false,
+    "jsx-no-lambda": false
   },
   "rulesDirectory": []
 }
