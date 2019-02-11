@@ -42,6 +42,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
+      'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'ENV.API_KEY': JSON.stringify(require(path.join(__dirname, 'environments', `${process.env.NODE_ENV}.js`)).API_KEY),
     })
   ]

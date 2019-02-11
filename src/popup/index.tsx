@@ -9,9 +9,12 @@ class Popup extends React.Component {
 
   public async componentDidMount() {
     const item = await chrome.storage.sync.get('apiKey');
-    if (item && item.apiKey) {
-      chrome.tabs.executeScript({ file: 'js/chrome-extension-async.js' });
+    const status = await chrome.storage.sync.get('running');
+    if (item && item.apiKey && status && !status.running) {
+      chrome.storage.sync.set({ running: true });
       chrome.tabs.executeScript({ file: 'js/content-script.js' });
+      window.close();
+    } else if (item && item.apiKey && status && status.running) {
       window.close();
     }
   }
@@ -20,7 +23,7 @@ class Popup extends React.Component {
     return (
       <React.Fragment>
         <div className="popupContainer">
-          <div className="option" onClick={() => this.click()}>
+          <div className="option" onClick={() => this.openOption()}>
             オプション画面でAPIキーを設定してください
           </div>
           <a
@@ -36,7 +39,7 @@ class Popup extends React.Component {
     );
   }
 
-  public click() {
+  public openOption() {
     chrome.runtime.openOptionsPage();
   }
 }

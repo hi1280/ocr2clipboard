@@ -3,10 +3,6 @@ import * as ReactDOM from 'react-dom';
 import Measure from 'react-measure';
 import styled from 'styled-components';
 
-declare const ENV: {
-  API_KEY: string;
-};
-
 const Wrapper = styled.div`
   position: fixed;
   top: 0;
@@ -56,7 +52,7 @@ class Main extends React.Component {
     super(props);
     this.imageCanvasRef = React.createRef();
     this.textareaRef = React.createRef();
-    chrome.storage.sync.get('apiKey').then(v => {
+    chrome.storage.sync.get('apiKey', v => {
       this.setState({ apiKey: v.apiKey });
     });
   }
@@ -85,7 +81,7 @@ class Main extends React.Component {
                   }
                 }}
               />
-              <TextArea ref={this.textareaRef} onClick={() => document.body.removeChild(app)} />
+              <TextArea ref={this.textareaRef} onClick={() => this.exit()} />
             </Wrapper>
           )}
         </Measure>
@@ -110,8 +106,10 @@ class Main extends React.Component {
       drag: false,
     });
     ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
-    chrome.runtime.sendMessage({});
-    this.addMessageListener();
+    if (this.state.rectangle.width > 0 && this.state.rectangle.height > 0) {
+      chrome.runtime.sendMessage({});
+      this.addMessageListener();
+    }
   }
 
   private addMessageListener() {
@@ -189,6 +187,11 @@ class Main extends React.Component {
       this.state.rectangle.width,
       this.state.rectangle.height,
     );
+  }
+
+  private exit() {
+    document.body.removeChild(app);
+    chrome.storage.sync.set({ running: false });
   }
 }
 
