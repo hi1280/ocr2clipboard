@@ -12,6 +12,7 @@ class Popup extends React.Component {
     if (item && item.apiKey) {
       chrome.tabs.executeScript({ file: 'js/chrome-extension-async.js' });
       chrome.tabs.executeScript({ file: 'js/content-script.js' });
+      window.close();
     }
   }
 

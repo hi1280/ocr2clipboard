@@ -52,7 +52,9 @@ const Option = withStyles(styles)(
     constructor(props: IProps) {
       super(props);
       chrome.storage.sync.get('apiKey').then(v => {
-        this.setState({ apiKey: v.apiKey });
+        if (v && v.apiKey) {
+          this.setState({ apiKey: v.apiKey });
+        }
       });
     }
 

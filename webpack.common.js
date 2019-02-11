@@ -3,8 +3,8 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    option: path.join(__dirname, "src/option/index.tsx"),
-    popup: path.join(__dirname, "src/option/popup.tsx"),
+    option: path.join(__dirname, "src/option.tsx"),
+    popup: path.join(__dirname, "src/popup/index.tsx"),
     "event-page": path.join(__dirname, "src/event-page.ts"),
     "chrome-extension-async": path.join(__dirname, "src/chrome-extension-async.js"),
     "content-script": path.join(__dirname, "src/content-script.tsx")
