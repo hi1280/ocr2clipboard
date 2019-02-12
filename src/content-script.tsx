@@ -1,8 +1,8 @@
+import { Close } from '@material-ui/icons';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Measure from 'react-measure';
 import styled from 'styled-components';
-
 const Wrapper = styled.div`
   position: fixed;
   top: 0;
@@ -18,9 +18,14 @@ const Canvas = styled.canvas`
   cursor: crosshair;
 `;
 
-const TextArea = styled.textarea`
+const TextArea = styled.div`
   position: absolute;
-  display: none;
+  background: #fff;
+  border: 1px solid #000;
+`;
+
+const RightAlignDiv = styled.div`
+  text-align: right;
 `;
 
 class Main extends React.Component {
@@ -37,6 +42,14 @@ class Main extends React.Component {
       rgb: { red: '255', green: '0', blue: '0' },
       top: 0,
       width: 0,
+    },
+    textarea: {
+      style: {
+        display: 'none',
+        left: 0,
+        top: 0,
+      },
+      value: '',
     },
     wrapper: {
       height: 0,
@@ -81,7 +94,17 @@ class Main extends React.Component {
                   }
                 }}
               />
-              <TextArea ref={this.textareaRef} onClick={() => this.exit()} />
+              <TextArea style={this.state.textarea.style} onClick={() => this.exit()}>
+                <RightAlignDiv>
+                  <Close style={{ fontSize: 18 }} />
+                </RightAlignDiv>
+                <textarea
+                  ref={this.textareaRef}
+                  value={this.state.textarea.value}
+                  readOnly={true}
+                  onClick={e => e.stopPropagation()}
+                />
+              </TextArea>
             </Wrapper>
           )}
         </Measure>
@@ -151,10 +174,16 @@ class Main extends React.Component {
         const json = await res.json();
         if (json && json.responses && json.responses[0].textAnnotations) {
           const textarea = this.textareaRef.current as HTMLTextAreaElement;
-          textarea.value = json.responses[0].textAnnotations[0].description;
-          textarea.style.left = `${this.state.mouse.x}px`;
-          textarea.style.top = `${this.state.mouse.y}px`;
-          textarea.style.display = 'block';
+          this.setState({
+            textarea: {
+              style: {
+                display: 'block',
+                left: `${this.state.mouse.x}px`,
+                top: `${this.state.mouse.y}px`,
+              },
+              value: json.responses[0].textAnnotations[0].description,
+            },
+          });
           textarea.select();
         }
       });
