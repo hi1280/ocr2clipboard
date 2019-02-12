@@ -1,4 +1,4 @@
-import { Close } from '@material-ui/icons';
+import Close from '@material-ui/icons/Close';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Measure from 'react-measure';
