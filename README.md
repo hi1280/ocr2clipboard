@@ -1,16 +1,14 @@
-# Chrome Extension (built with TypeScript + React)
+# OCR to Clipboard
 
-> This project is a boilerplate project to allow you to quickly build chrome extensions using TypeScript and React.
+## Overview
 
-## Building
+OCR on the browser and copy it to the clipboard.
+OCR uses the [Cloud Vision API](https://cloud.google.com/vision/?hl=ja).
 
-1.  Clone repo
-2.  `npm i`
-3.  `npm run dev` to compile once or `npm run watch` to run the dev task in watch mode
-4.  `npm run build` to build a production (minified) version
+## Demo
 
-## Installation
+## Setup
 
-1.  Complete the steps to build the project above
-2.  Go to [_chrome://extensions_](chrome://extensions) in Google Chrome
-3.  With the developer mode checkbox ticked, click **Load unpacked extension...** and select the _dist_ folder from this repo
+[Using API Keys](https://cloud.google.com/docs/authentication/api-keys) of GCP API
+
+Set your API key on option page
