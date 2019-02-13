@@ -1,3 +1,7 @@
+chrome.tabs.onUpdated.addListener(() => {
+  chrome.storage.sync.set({ running: false });
+});
+
 chrome.runtime.onMessage.addListener(async (_1, _2, sendResponse) => {
   try {
     sendResponse(true);
