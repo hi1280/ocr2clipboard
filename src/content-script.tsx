@@ -28,7 +28,7 @@ const RightAlignDiv = styled.div`
   text-align: right;
 `;
 
-class Main extends React.Component {
+export class Main extends React.Component {
   public state = {
     apiKey: '',
     drag: false,

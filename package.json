@@ -6,7 +6,8 @@
     "build": "NODE_ENV=production webpack --config webpack.prod.js",
     "dev": "NODE_ENV=development webpack --config webpack.dev.js",
     "watch": "NODE_ENV=development webpack -w --config webpack.dev.js",
-    "lint": "tslint -p tsconfig.json --fix"
+    "lint": "tslint -p tsconfig.json --fix",
+    "test": "jest"
   },
   "author": "hi1280",
   "license": "MIT",
@@ -27,6 +28,9 @@
     ]
   },
   "devDependencies": {
+    "@types/enzyme": "^3.1.17",
+    "@types/enzyme-adapter-react-16": "^1.0.3",
+    "@types/jest": "^24.0.1",
     "@types/react": "^16.0.40",
     "@types/react-dom": "^16.0.4",
     "@types/react-measure": "^2.0.4",
@@ -34,12 +38,18 @@
     "chrome-extension-async": "^3.3.2",
     "css-loader": "^0.28.11",
     "dotenv": "^6.2.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.9.1",
+    "enzyme-to-json": "^3.3.5",
     "husky": "^1.2.0",
+    "jest": "^24.1.0",
+    "jest-webextension-mock": "^3.5.0",
     "lint-staged": "^8.1.0",
     "node-sass": "^4.7.2",
     "prettier": "^1.15.3",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
+    "ts-jest": "^23.10.5",
     "ts-loader": "^4.0.1",
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.17.0",

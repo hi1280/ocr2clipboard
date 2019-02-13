@@ -1,0 +1,290 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot Testing at Initialize 1`] = `
+<Main>
+  <Measure
+    offset={true}
+    onResize={[Function]}
+  >
+    <Component
+      contentRect={
+        Object {
+          "bounds": Object {},
+          "client": Object {},
+          "entry": Object {},
+          "margin": Object {},
+          "offset": Object {},
+          "scroll": Object {},
+        }
+      }
+      measure={[Function]}
+      measureRef={[Function]}
+      offset={true}
+    >
+      <styled.div>
+        <StyledComponent
+          forwardedComponent={
+            Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-bdVaJa",
+                "isStatic": true,
+                "lastClassName": "dAWacL",
+                "rules": Array [
+                  "
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+",
+                ],
+              },
+              "displayName": "styled.div",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-bdVaJa",
+              "target": "div",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            }
+          }
+          forwardedRef={[Function]}
+        >
+          <div
+            className="sc-bdVaJa dAWacL"
+          >
+            <styled.canvas
+              height={0}
+              onMouseDown={[Function]}
+              onMouseMove={[Function]}
+              onMouseUp={[Function]}
+              width={0}
+            >
+              <StyledComponent
+                forwardedComponent={
+                  Object {
+                    "$$typeof": Symbol(react.forward_ref),
+                    "attrs": Array [],
+                    "componentStyle": ComponentStyle {
+                      "componentId": "sc-bwzfXH",
+                      "isStatic": true,
+                      "lastClassName": "kNvjxv",
+                      "rules": Array [
+                        "
+  position: fixed;
+  top: 0;
+  left: 0;
+  cursor: crosshair;
+",
+                      ],
+                    },
+                    "displayName": "styled.canvas",
+                    "foldedComponentIds": Array [],
+                    "render": [Function],
+                    "styledComponentId": "sc-bwzfXH",
+                    "target": "canvas",
+                    "toString": [Function],
+                    "warnTooManyClasses": [Function],
+                    "withComponent": [Function],
+                  }
+                }
+                forwardedRef={null}
+                height={0}
+                onMouseDown={[Function]}
+                onMouseMove={[Function]}
+                onMouseUp={[Function]}
+                width={0}
+              >
+                <canvas
+                  className="sc-bwzfXH kNvjxv"
+                  height={0}
+                  onMouseDown={[Function]}
+                  onMouseMove={[Function]}
+                  onMouseUp={[Function]}
+                  width={0}
+                />
+              </StyledComponent>
+            </styled.canvas>
+            <styled.div
+              onClick={[Function]}
+              style={
+                Object {
+                  "display": "none",
+                  "left": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <StyledComponent
+                forwardedComponent={
+                  Object {
+                    "$$typeof": Symbol(react.forward_ref),
+                    "attrs": Array [],
+                    "componentStyle": ComponentStyle {
+                      "componentId": "sc-htpNat",
+                      "isStatic": true,
+                      "lastClassName": "kKJWOp",
+                      "rules": Array [
+                        "
+  position: absolute;
+  background: #fff;
+  border: 1px solid #000;
+",
+                      ],
+                    },
+                    "displayName": "styled.div",
+                    "foldedComponentIds": Array [],
+                    "render": [Function],
+                    "styledComponentId": "sc-htpNat",
+                    "target": "div",
+                    "toString": [Function],
+                    "warnTooManyClasses": [Function],
+                    "withComponent": [Function],
+                  }
+                }
+                forwardedRef={null}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "display": "none",
+                    "left": 0,
+                    "top": 0,
+                  }
+                }
+              >
+                <div
+                  className="sc-htpNat kKJWOp"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "display": "none",
+                      "left": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <styled.div>
+                    <StyledComponent
+                      forwardedComponent={
+                        Object {
+                          "$$typeof": Symbol(react.forward_ref),
+                          "attrs": Array [],
+                          "componentStyle": ComponentStyle {
+                            "componentId": "sc-bxivhb",
+                            "isStatic": true,
+                            "lastClassName": "gJaspy",
+                            "rules": Array [
+                              "
+  text-align: right;
+",
+                            ],
+                          },
+                          "displayName": "styled.div",
+                          "foldedComponentIds": Array [],
+                          "render": [Function],
+                          "styledComponentId": "sc-bxivhb",
+                          "target": "div",
+                          "toString": [Function],
+                          "warnTooManyClasses": [Function],
+                          "withComponent": [Function],
+                        }
+                      }
+                      forwardedRef={null}
+                    >
+                      <div
+                        className="sc-bxivhb gJaspy"
+                      >
+                        <pure(CloseIcon)
+                          style={
+                            Object {
+                              "fontSize": 18,
+                            }
+                          }
+                        >
+                          <CloseIcon
+                            style={
+                              Object {
+                                "fontSize": 18,
+                              }
+                            }
+                          >
+                            <WithStyles(SvgIcon)
+                              style={
+                                Object {
+                                  "fontSize": 18,
+                                }
+                              }
+                            >
+                              <SvgIcon
+                                classes={
+                                  Object {
+                                    "colorAction": "MuiSvgIcon-colorAction-4",
+                                    "colorDisabled": "MuiSvgIcon-colorDisabled-6",
+                                    "colorError": "MuiSvgIcon-colorError-5",
+                                    "colorPrimary": "MuiSvgIcon-colorPrimary-2",
+                                    "colorSecondary": "MuiSvgIcon-colorSecondary-3",
+                                    "fontSizeInherit": "MuiSvgIcon-fontSizeInherit-7",
+                                    "fontSizeLarge": "MuiSvgIcon-fontSizeLarge-9",
+                                    "fontSizeSmall": "MuiSvgIcon-fontSizeSmall-8",
+                                    "root": "MuiSvgIcon-root-1",
+                                  }
+                                }
+                                color="inherit"
+                                component="svg"
+                                fontSize="default"
+                                style={
+                                  Object {
+                                    "fontSize": 18,
+                                  }
+                                }
+                                viewBox="0 0 24 24"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  className="MuiSvgIcon-root-1"
+                                  focusable="false"
+                                  role="presentation"
+                                  style={
+                                    Object {
+                                      "fontSize": 18,
+                                    }
+                                  }
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                                  />
+                                  <path
+                                    d="M0 0h24v24H0z"
+                                    fill="none"
+                                  />
+                                </svg>
+                              </SvgIcon>
+                            </WithStyles(SvgIcon)>
+                          </CloseIcon>
+                        </pure(CloseIcon)>
+                      </div>
+                    </StyledComponent>
+                  </styled.div>
+                  <textarea
+                    onClick={[Function]}
+                    readOnly={true}
+                    value=""
+                  />
+                </div>
+              </StyledComponent>
+            </styled.div>
+          </div>
+        </StyledComponent>
+      </styled.div>
+    </Component>
+  </Measure>
+  <canvas
+    height={0}
+    width={0}
+  />
+</Main>
+`;
