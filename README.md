@@ -15,6 +15,7 @@ OCR uses the [Cloud Vision API](https://cloud.google.com/vision/?hl=ja).
 * Enable Developer mode by ticking the checkbox in the upper-right corner.
 * Click on the "Load unpacked extension..." button.
 * Select the directory containing your unpacked extension.
+  * unpacked extension is [release zip file](https://github.com/hi1280/ocr2clipboard/releases)
 
 ## Setup
 
