@@ -1,10 +1,17 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { addLocaleData, FormattedMessage, injectIntl, IntlProvider } from 'react-intl';
+import * as en from 'react-intl/locale-data/en';
+import * as ja from 'react-intl/locale-data/ja';
+import { Util } from '../util';
 import './popup.scss';
 
 class Popup extends React.Component {
+  private locale = navigator.language.split('_')[0];
+
   constructor(props: object) {
     super(props);
+    addLocaleData([...en, ...ja]);
   }
 
   public async componentDidMount() {
@@ -21,21 +28,23 @@ class Popup extends React.Component {
 
   public render() {
     return (
-      <React.Fragment>
-        <div className="popupContainer">
-          <div className="option" onClick={() => this.openOption()}>
-            オプション画面でAPIキーを設定してください
+      <IntlProvider locale={this.locale} messages={Util.chooseLocale(this.locale)}>
+        <React.Fragment>
+          <div className="popupContainer">
+            <div className="option" onClick={() => this.openOption()}>
+              <FormattedMessage id="popup_main" />
+            </div>
+            <a
+              className="link"
+              href="https://cloud.google.com/docs/authentication/api-keys?hl=ja"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FormattedMessage id="popup_sub" />
+            </a>
           </div>
-          <a
-            className="link"
-            href="https://cloud.google.com/docs/authentication/api-keys?hl=ja"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            APIキーの説明
-          </a>
-        </div>
-      </React.Fragment>
+        </React.Fragment>
+      </IntlProvider>
     );
   }
 

@@ -8,6 +8,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { addLocaleData, FormattedMessage, injectIntl, IntlProvider } from 'react-intl';
+import * as en from 'react-intl/locale-data/en';
+import * as ja from 'react-intl/locale-data/ja';
+import { Util } from './util';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -48,9 +52,24 @@ const Option = withStyles(styles)(
     public state = {
       apiKey: '',
     };
+    private locale = navigator.language.split('_')[0];
+
+    private apiKeyMessage = injectIntl(({ intl }) => {
+      return (
+        <TextField
+          fullWidth={true}
+          id="apiKey"
+          name="apiKey"
+          label={intl.formatMessage({ id: 'apikey' })}
+          value={this.state.apiKey}
+          onChange={e => this.handleChange(e)}
+        />
+      );
+    });
 
     constructor(props: IProps) {
       super(props);
+      addLocaleData([...en, ...ja]);
       chrome.storage.sync.get('apiKey').then(v => {
         if (v && v.apiKey) {
           this.setState({ apiKey: v.apiKey });
@@ -61,32 +80,27 @@ const Option = withStyles(styles)(
     public render() {
       const { classes } = this.props;
       return (
-        <React.Fragment>
-          <CssBaseline />
-          <AppBar position="static" color="default">
-            <Toolbar>
-              <Typography variant="h6" color="inherit">
-                設定
-              </Typography>
-            </Toolbar>
-          </AppBar>
-          <main className={classes.layout}>
-            <Paper className={classes.paper}>
-              <Grid container={true} spacing={24}>
-                <Grid item={true} xs={12}>
-                  <TextField
-                    fullWidth={true}
-                    id="apiKey"
-                    name="apiKey"
-                    label="APIキー"
-                    value={this.state.apiKey}
-                    onChange={e => this.handleChange(e)}
-                  />
+        <IntlProvider locale={this.locale} messages={Util.chooseLocale(this.locale)}>
+          <React.Fragment>
+            <CssBaseline />
+            <AppBar position="static" color="default">
+              <Toolbar>
+                <Typography variant="h6" color="inherit">
+                  <FormattedMessage id="config" />
+                </Typography>
+              </Toolbar>
+            </AppBar>
+            <main className={classes.layout}>
+              <Paper className={classes.paper}>
+                <Grid container={true} spacing={24}>
+                  <Grid item={true} xs={12}>
+                    <this.apiKeyMessage />
+                  </Grid>
                 </Grid>
-              </Grid>
-            </Paper>
-          </main>
-        </React.Fragment>
+              </Paper>
+            </main>
+          </React.Fragment>
+        </IntlProvider>
       );
     }
 
