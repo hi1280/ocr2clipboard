@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { addLocaleData, FormattedMessage, injectIntl, IntlProvider } from 'react-intl';
+import { addLocaleData, FormattedMessage, IntlProvider } from 'react-intl';
 import * as en from 'react-intl/locale-data/en';
 import * as ja from 'react-intl/locale-data/ja';
 import { Util } from '../util';

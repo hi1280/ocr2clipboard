@@ -15,9 +15,6 @@ import { Util } from './util';
 
 const styles = (theme: Theme) =>
   createStyles({
-    appBar: {
-      position: 'relative',
-    },
     layout: {
       marginLeft: theme.spacing.unit * 2,
       marginRight: theme.spacing.unit * 2,
@@ -39,13 +36,7 @@ const styles = (theme: Theme) =>
     },
   });
 
-interface IProps extends WithStyles<typeof styles> {
-  classes: {
-    appBar: string;
-    layout: string;
-    paper: string;
-  };
-}
+interface IProps extends WithStyles<typeof styles> {}
 
 const Option = withStyles(styles)(
   class extends React.Component<IProps> {
