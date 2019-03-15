@@ -130,48 +130,41 @@ export class Main extends React.Component {
     });
     ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
     if (this.state.rectangle.width > 0 && this.state.rectangle.height > 0) {
-      chrome.runtime.sendMessage({});
+      chrome.runtime.sendMessage({
+        status: 'mouseUp',
+      });
       this.addMessageListener();
     }
   }
 
   private addMessageListener() {
-    const listener = (request: { base64Img: string }, _: any, sendResponse: (response: any) => void) => {
-      const base64Img = request.base64Img;
-      const canvas = this.imageCanvasRef.current as HTMLCanvasElement;
-      const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
-      const img = new Image();
-      img.src = base64Img;
-      img.addEventListener('load', async () => {
-        ctx.drawImage(
-          img,
-          this.state.rectangle.left,
-          this.state.rectangle.top,
-          this.state.rectangle.width,
-          this.state.rectangle.height,
-          0,
-          0,
-          this.state.rectangle.width,
-          this.state.rectangle.height,
-        );
-        const res = await fetch(`https://vision.googleapis.com/v1/images:annotate?key=${this.state.apiKey}`, {
-          body: JSON.stringify({
-            requests: [
-              {
-                features: [
-                  {
-                    type: 'TEXT_DETECTION',
-                  },
-                ],
-                image: {
-                  content: canvas.toDataURL('image/png').split(',')[1],
-                },
-              },
-            ],
-          }),
-          method: 'POST',
+    const listener = (request: { [key: string]: any }, _: any, sendResponse: (response: any) => void) => {
+      sendResponse(true);
+      if (request.status === 'mouseUp') {
+        const base64Img = request.base64Img;
+        const canvas = this.imageCanvasRef.current as HTMLCanvasElement;
+        const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+        const img = new Image();
+        img.src = base64Img;
+        img.addEventListener('load', async () => {
+          ctx.drawImage(
+            img,
+            this.state.rectangle.left,
+            this.state.rectangle.top,
+            this.state.rectangle.width,
+            this.state.rectangle.height,
+            0,
+            0,
+            this.state.rectangle.width,
+            this.state.rectangle.height,
+          );
+          chrome.runtime.sendMessage({
+            image: canvas.toDataURL('image/png').split(',')[1],
+            status: 'imageComplete',
+          });
         });
-        const json = await res.json();
+      } else if (request.status === 'imageComplete') {
+        const json = request.json;
         if (json && json.responses && json.responses[0].textAnnotations) {
           const textarea = this.textareaRef.current as HTMLTextAreaElement;
           this.setState({
@@ -186,9 +179,8 @@ export class Main extends React.Component {
           });
           textarea.select();
         }
-      });
-      chrome.runtime.onMessage.removeListener(listener);
-      sendResponse(true);
+        chrome.runtime.onMessage.removeListener(listener);
+      }
       return true;
     };
     chrome.runtime.onMessage.addListener(listener);
